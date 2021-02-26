@@ -17,56 +17,56 @@
         
         private class Node
         {
-            public int value { get; set; }
-            public Node leftChild { get; set; }
-            public Node rightChild { get; set; }
+            public int Value { get; set; }
+            public Node LeftChild { get; set; }
+            public Node RightChild { get; set; }
 
             public Node()
             {
-                this.value = 0;
-                this.leftChild = null;
-                this.rightChild = null;
+                this.Value = 0;
+                this.LeftChild = null;
+                this.RightChild = null;
             }
         }
 
-        private void UpdateTree(Node currentNode, int lBorder, int rBorder, int position, int value)
+        private void UpdateTree(Node currentNode, int leftBorder, int rightBorder, int position, int value)
         {
-            if (lBorder == rBorder)
+            if (leftBorder == rightBorder)
             {
-                currentNode.value = value;
+                currentNode.Value = value;
                 return;
             }
 
-            int middlePosition = (lBorder + rBorder) / 2;
+            int middlePosition = (leftBorder + rightBorder) / 2;
 
             if (position <= middlePosition)
             {
-                if (currentNode.leftChild == null)
+                if (currentNode.LeftChild == null)
                 {
-                    currentNode.leftChild = new Node();
+                    currentNode.LeftChild = new Node();
                 }
                 
-                UpdateTree(currentNode.leftChild, lBorder, middlePosition, position, value);
-                currentNode.value = currentNode.leftChild.value;
+                UpdateTree(currentNode.LeftChild, leftBorder, middlePosition, position, value);
+                currentNode.Value = currentNode.LeftChild.Value;
 
-                if (currentNode.rightChild != null)
+                if (currentNode.RightChild != null)
                 {
-                    currentNode.value += currentNode.rightChild.value;
+                    currentNode.Value += currentNode.RightChild.Value;
                 }
             }
             else
             {
-                if (currentNode.rightChild == null)
+                if (currentNode.RightChild == null)
                 {
-                    currentNode.rightChild = new Node();
+                    currentNode.RightChild = new Node();
                 }
                 
-                UpdateTree(currentNode.rightChild, middlePosition + 1, rBorder, position, value);
-                currentNode.value = currentNode.rightChild.value;
+                UpdateTree(currentNode.RightChild, middlePosition + 1, rightBorder, position, value);
+                currentNode.Value = currentNode.RightChild.Value;
 
-                if (currentNode.leftChild != null)
+                if (currentNode.LeftChild != null)
                 {
-                    currentNode.value += currentNode.leftChild.value;
+                    currentNode.Value += currentNode.LeftChild.Value;
                 }
             }
         }
@@ -76,42 +76,42 @@
             UpdateTree(root, 1, maxSize, position, value);
         }
 
-        private int GetSegmentSum(Node currentNode, int lBorder, int rBorder,
+        private int GetSegmentSum(Node currentNode, int leftBorder, int rightBorder,
                                   int requestedLBorder, int requestedRBorder)
         {
-            if (requestedLBorder <= lBorder && rBorder <= requestedRBorder)
+            if (requestedLBorder <= leftBorder && rightBorder <= requestedRBorder)
             {
-                return currentNode.value;
+                return currentNode.Value;
             }
 
-            if (requestedRBorder < lBorder || rBorder < requestedLBorder)
+            if (requestedRBorder < leftBorder || rightBorder < requestedLBorder)
             {
                 return 0;
             }
 
-            int middlePosition = (lBorder + rBorder) / 2;
+            int middlePosition = (leftBorder + rightBorder) / 2;
 
             int lSum = 0;
             int rSum = 0;
 
-            if (currentNode.leftChild != null)
+            if (currentNode.LeftChild != null)
             {
-                lSum = GetSegmentSum(currentNode.leftChild, lBorder, middlePosition, 
+                lSum = GetSegmentSum(currentNode.LeftChild, leftBorder, middlePosition, 
                                      requestedLBorder, requestedRBorder);
             }
             
-            if (currentNode.leftChild != null)
+            if (currentNode.LeftChild != null)
             {
-                rSum = GetSegmentSum(currentNode.rightChild, middlePosition + 1, rBorder, 
+                rSum = GetSegmentSum(currentNode.RightChild, middlePosition + 1, rightBorder, 
                     requestedLBorder, requestedRBorder);
             }
 
             return lSum + rSum;
         }
 
-        public int GetSum(int lBorder, int rBorder)
+        public int GetSum(int leftBorder, int rightBorder)
         {
-            return GetSegmentSum(root, 1, maxSize, lBorder, rBorder);
+            return GetSegmentSum(root, 1, maxSize, leftBorder, rightBorder);
         }
     }
 }
