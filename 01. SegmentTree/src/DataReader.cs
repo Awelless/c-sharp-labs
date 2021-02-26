@@ -6,20 +6,54 @@ namespace SegmentTree
     {
         public static int ReadInt()
         {
-            return Convert.ToInt32(Console.ReadLine());
+            while (true)
+            {
+                string text = Console.ReadLine();
+                int number;
+                if (Int32.TryParse(text, out number))
+                {
+                    return number;
+                }
+                else
+                {
+                   Console.WriteLine("Invalid input. Try again");
+                }
+            }
         }
         
         public static int[] ReadIntArray(int length)
         {
-            string[] inputArray = Console.ReadLine().Split(' ');
-            
-            int[] result = new int[length];
-            for (int index = 0; index < length; index++)
+            while (true)
             {
-                result[index] = Convert.ToInt32(inputArray[index]);
+                string text = Console.ReadLine();
+                string[] inputArray = text.Split(' ');
+                int[] result = new int[length];
+
+                if (inputArray.Length != length)
+                {
+                    Console.WriteLine("Invalid input. Try again");
+                    continue;
+                }
+
+                bool isCorrectParsed = true;
+                
+                for (int index = 0; index < length; index++)
+                {
+                    if (!Int32.TryParse(inputArray[index], out result[index]))
+                    {
+                        isCorrectParsed = false;
+                    }
+                }
+
+                if (isCorrectParsed)
+                {
+                    return result;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Try again");
+                }
             }
-            
-            return result;
         }
     }
 }
