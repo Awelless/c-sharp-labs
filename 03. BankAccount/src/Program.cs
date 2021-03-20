@@ -25,6 +25,17 @@ namespace BankAccount
             BankAccount anotherAccount = new BankAccount();
             
             Console.WriteLine(account.Equals(anotherAccount));
+            Console.WriteLine();
+
+            
+            Bank bank = new Bank(account, anotherAccount);
+            
+            Console.WriteLine("2nd account in bank:");
+            Console.WriteLine(bank[1]);
+
+            bank[0] = anotherAccount;
+            
+            Console.WriteLine(bank[0].Equals(bank[1]));
         }
     }
 }
