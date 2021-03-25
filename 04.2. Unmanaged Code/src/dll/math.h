@@ -16,5 +16,5 @@ extern "C" {
     DLLIMPORT_EXPORT int _stdcall Min(int a, int b);
     DLLIMPORT_EXPORT int _stdcall Max(int a, int b);
     DLLIMPORT_EXPORT int _stdcall Abs(int a);
-    DLLIMPORT_EXPORT int _stdcall Pow(int a, int power);
+    DLLIMPORT_EXPORT int _cdecl Pow(int a, int power);
 }

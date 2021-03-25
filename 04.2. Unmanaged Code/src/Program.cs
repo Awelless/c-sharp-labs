@@ -32,7 +32,7 @@ namespace Unmanaged_Code
         [DllImport("math.dll", CallingConvention = CallingConvention.StdCall)]
         static extern int Abs(int a);
         
-        [DllImport("math.dll", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("math.dll", CallingConvention = CallingConvention.Cdecl)]
         static extern int Pow(int a, int power);
         
         static void Main(string[] args)

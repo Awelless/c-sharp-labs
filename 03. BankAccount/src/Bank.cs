@@ -28,6 +28,11 @@ namespace BankAccount
             set { BankAccounts[index] = value;  }
         }
 
+        public int GetNumberOfAccounts()
+        {
+            return BankAccounts.Count;
+        } 
+
         public List<BankAccount> GetAll()
         {
             return BankAccounts;
