@@ -6,34 +6,34 @@ namespace Unmanaged_Code
     class Program
     {
         [DllImport("math.dll", CallingConvention = CallingConvention.StdCall)]
-        static extern int Sum(int a, int b);
+        private static extern int Sum(int a, int b);
         
         [DllImport("math.dll", CallingConvention = CallingConvention.StdCall)]
-        static extern int Subtract(int a, int b);
+        private static extern int Subtract(int a, int b);
         
         [DllImport("math.dll", CallingConvention = CallingConvention.StdCall)]
-        static extern int Multiply(int a, int b);
+        private static extern int Multiply(int a, int b);
         
         [DllImport("math.dll", CallingConvention = CallingConvention.StdCall)]
-        static extern int Divide(int a, int b);
+        private static extern int Divide(int a, int b);
         
         [DllImport("math.dll", CallingConvention = CallingConvention.StdCall)]
-        static extern int Mod(int a, int b);
+        private static extern int Mod(int a, int b);
         
         [DllImport("math.dll", CallingConvention = CallingConvention.StdCall)]
-        static extern int Gcd(int a, int b);
+        private static extern int Gcd(int a, int b);
         
         [DllImport("math.dll", CallingConvention = CallingConvention.StdCall)]
-        static extern int Min(int a, int b);
+        private static extern int Min(int a, int b);
         
         [DllImport("math.dll", CallingConvention = CallingConvention.StdCall)]
-        static extern int Max(int a, int b);
+        private static extern int Max(int a, int b);
         
         [DllImport("math.dll", CallingConvention = CallingConvention.StdCall)]
-        static extern int Abs(int a);
+        private static extern int Abs(int a);
         
         [DllImport("math.dll", CallingConvention = CallingConvention.Cdecl)]
-        static extern int Pow(int a, int power);
+        private static extern int Pow(int a, int power);
         
         static void Main(string[] args)
         {
