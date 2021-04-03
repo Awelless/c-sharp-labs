@@ -1,9 +1,9 @@
 ﻿#nullable enable
 using System;
 
-namespace BankAccount
+namespace BankAccount.Accounts
 {
-    public class BankAccount
+    public class Account
     {
         private static uint _idCounter = 1;
         
@@ -11,7 +11,7 @@ namespace BankAccount
         public double Balance { get; private set; }
         public bool IsBlocked { get; private set; }
 
-        public BankAccount()
+        public Account()
         {
             id = _idCounter++;
             Balance = 0;
@@ -120,7 +120,7 @@ namespace BankAccount
                 return false;
             }
 
-            BankAccount bankAccount = (BankAccount) o;
+            Account bankAccount = (Account) o;
             return bankAccount.id == id;
         }
 
