@@ -20,84 +20,88 @@ namespace BankAccount.Accounts
             IsBlocked = false;
         }
 
-        public virtual void PutMoney(double moneyAmount)
+        public virtual bool PutMoney(double moneyAmount)
         {
             if (moneyAmount < 0)
             {
                 Console.WriteLine("Invalid value of moneyAmount: " + moneyAmount);
-                return;
+                return false;
             }
 
             if (IsBlocked)
             {
                 Console.WriteLine("You count put money. Account is blocked");
-                return;
+                return false;
             }
 
             Balance += moneyAmount;
+            return true;
         }
         
-        public virtual void PutMoney(int moneyAmount)
+        public virtual bool PutMoney(int moneyAmount)
         {
             if (moneyAmount < 0)
             {
                 Console.WriteLine("Invalid value of moneyAmount: " + moneyAmount);
-                return;
+                return false;
             }
 
             if (IsBlocked)
             {
                 Console.WriteLine("You count put money. Account is blocked");
-                return;
+                return false;
             }
 
             Balance += moneyAmount;
+            return true;
         }
 
-        public virtual void WithdrawMoney(double moneyAmount)
+        public virtual bool WithdrawMoney(double moneyAmount)
         {
             if (moneyAmount < 0)
             {
                 Console.WriteLine("Invalid value of moneyAmount: " + moneyAmount);
-                return;
+                return false;
             }
             
             if (IsBlocked)
             {
                 Console.WriteLine("You count withdraw money. Account is blocked");
-                return;
+                return false;
             }
 
             if (moneyAmount > Balance)
             {
                 Console.WriteLine("You don't have enough money to withdraw: " + moneyAmount);
-                return;
+                return false;
             }
 
             Balance -= moneyAmount;
+            return true;
         }
         
-        public virtual void WithdrawMoney(int moneyAmount)
+        public virtual bool WithdrawMoney(int moneyAmount)
         {
             if (moneyAmount < 0)
             {
                 Console.WriteLine("Invalid value of moneyAmount: " + moneyAmount);
-                return;
+                return false;
             }
             
             if (IsBlocked)
             {
                 Console.WriteLine("You count withdraw money. Account is blocked");
-                return;
+                return false;
             }
 
             if (moneyAmount > Balance)
             {
                 Console.WriteLine("You don't have enough money to withdraw: " + moneyAmount);
-                return;
+                return false;
             }
 
             Balance -= moneyAmount;
+            return true;
         }
 
         public void BlockAccount()

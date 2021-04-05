@@ -11,28 +11,52 @@ namespace BankAccount.Accounts
             Iban = iban;
         }
 
-        public override void PutMoney(double moneyAmount)
+        public override bool PutMoney(double moneyAmount)
         {
-            base.PutMoney(moneyAmount);
-            Console.WriteLine("Money are put on account. Iban: " + Iban);
+            bool isPut = base.PutMoney(moneyAmount);
+
+            if (isPut)
+            {
+                Console.WriteLine("Money are put on account. Iban: " + Iban);
+            }
+
+            return isPut;
         }
         
-        public override void PutMoney(int moneyAmount)
+        public override bool PutMoney(int moneyAmount)
         {
-            base.PutMoney(moneyAmount);
-            Console.WriteLine("Money are put on account. Iban: " + Iban);
+            bool isPut = base.PutMoney(moneyAmount);
+
+            if (isPut)
+            {
+                Console.WriteLine("Money are put on account. Iban: " + Iban);
+            }
+
+            return isPut;
         }
 
-        public override void WithdrawMoney(double moneyAmount)
+        public override bool WithdrawMoney(double moneyAmount)
         {
-            base.WithdrawMoney(moneyAmount);
-            Console.WriteLine("Money are withdrawn from account. Iban: " + Iban);
+            bool isPut = base.WithdrawMoney(moneyAmount);
+
+            if (isPut)
+            {
+                Console.WriteLine("Money are withdrawn from account. Iban: " + Iban);
+            }
+
+            return isPut;
         }
         
-        public override void WithdrawMoney(int moneyAmount)
+        public override bool WithdrawMoney(int moneyAmount)
         {
-            base.WithdrawMoney(moneyAmount);
-            Console.WriteLine("Money are withdrawn from account. Iban: " + Iban);
+            bool isPut = base.WithdrawMoney(moneyAmount);
+
+            if (isPut)
+            {
+                Console.WriteLine("Money are withdrawn from account. Iban: " + Iban);
+            }
+
+            return isPut;
         }
 
         public override string ToString()
