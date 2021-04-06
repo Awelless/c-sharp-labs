@@ -7,7 +7,7 @@ namespace BankAccount
     {
         static void Main(string[] args)
         {
-            AbstractAccount cardAccount = new CardAccount(Currency.EUR, 4133);
+            AbstractAccount cardAccount = new CardAccount(Currency.EUR, 4133, DateTime.Parse("10/12/2023"));
 
             Console.WriteLine("Starting balance: " + cardAccount.Balance);
             cardAccount.PutMoney(200);
@@ -23,7 +23,7 @@ namespace BankAccount
             cardAccount.WithdrawMoney(20);
             Console.WriteLine();
 
-            AbstractAccount depositCardAccount = new DepositCardAccount(Currency.USD, 1234, 0.05);
+            AbstractAccount depositCardAccount = new DepositCardAccount(Currency.USD, 1234, DateTime.Parse("10/12/2024"), 0.05);
             
             depositCardAccount.PutMoney(100);
             ((DepositCardAccount) depositCardAccount).UpdateBalance();

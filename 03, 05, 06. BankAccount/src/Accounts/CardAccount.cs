@@ -4,11 +4,11 @@ namespace BankAccount.Accounts
 {
     public class CardAccount : AbstractAccount
     {
-        public int CardNumber { get; }
+        public CardInfo CardInfo { get; }
         
-        public CardAccount(Currency currency, int cardNumber) : base(currency)
+        public CardAccount(Currency currency, int cardNumber, DateTime cardExpirationDate) : base(currency)
         {
-            CardNumber = cardNumber;
+            CardInfo = new CardInfo(cardNumber, cardExpirationDate);
         }
         
         public override bool PutMoney(double moneyAmount)
@@ -17,7 +17,7 @@ namespace BankAccount.Accounts
             
             if (isPut)
             {
-                Console.WriteLine("Money are put on card: " + CardNumber);   
+                Console.WriteLine("Money are put on card: " + CardInfo.Number);   
             }
 
             return isPut;
@@ -29,7 +29,7 @@ namespace BankAccount.Accounts
 
             if (isPut)
             {
-                Console.WriteLine("Money are put on card: " + CardNumber);   
+                Console.WriteLine("Money are put on card: " + CardInfo.Number);   
             }
 
             return isPut;
@@ -41,7 +41,7 @@ namespace BankAccount.Accounts
             
             if (isPut)
             {
-                Console.WriteLine("Money are withdrawn from card: " + CardNumber);
+                Console.WriteLine("Money are withdrawn from card: " + CardInfo.Number);
             }
 
             return isPut;
@@ -53,7 +53,7 @@ namespace BankAccount.Accounts
             
             if (isPut)
             {
-                Console.WriteLine("Money are withdrawn from card: " + CardNumber);
+                Console.WriteLine("Money are withdrawn from card: " + CardInfo.Number);
             }
 
             return isPut;
@@ -66,9 +66,9 @@ namespace BankAccount.Accounts
                                  "balance = {1}\n" +
                                  "currency = {2}\n" +
                                  "isBlocked = {3}\n" +
-                                 "cardNumber = {4}\n" +
+                                 "cardInfo = {4}\n" +
                                  "}}", 
-                Id, Balance, Currency, IsBlocked, CardNumber);
+                Id, Balance, Currency, IsBlocked, CardInfo);
         }
     }
 }
