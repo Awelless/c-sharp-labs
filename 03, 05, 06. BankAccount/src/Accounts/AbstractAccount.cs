@@ -1,5 +1,4 @@
-﻿#nullable enable
-using System;
+﻿using System;
 
 namespace BankAccount.Accounts
 {
@@ -114,7 +113,7 @@ namespace BankAccount.Accounts
             IsBlocked = true;
         }
 
-        public int CompareTo(AbstractAccount? o)
+        public int CompareTo(AbstractAccount o)
         {
             if (o == null)
             {
@@ -134,7 +133,7 @@ namespace BankAccount.Accounts
             return 0;
         }
 
-        public override bool Equals(object? o)
+        public override bool Equals(Object o)
         {
             if (o == this)
             {
