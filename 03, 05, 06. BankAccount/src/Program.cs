@@ -48,6 +48,10 @@ namespace BankAccount
             
             Console.WriteLine(bank[0].Equals(bank[1]));
             Console.WriteLine(internationalAccount.CompareTo(depositCardAccount));
+
+
+            ICharity charity = new CharityAccount(Currency.RUB);
+            charity.Donate(123);
         }
     }
 }
