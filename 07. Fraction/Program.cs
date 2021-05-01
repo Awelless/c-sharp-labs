@@ -11,7 +11,7 @@ namespace Fraction
             Fraction fraction2 = Fraction.Parse("9/6", FractionFormat.Standart);
             Fraction fraction3 = Fraction.Parse("-2(4/10)", FractionFormat.Mixed);
             Fraction fraction4 = Fraction.Parse("-7", FractionFormat.IntegerValue);
-            Fraction fraction5 = Fraction.Parse("6.25", FractionFormat.DoubleValue);
+            Fraction fraction5 = Fraction.Parse("-6.25", FractionFormat.DoubleValue);
 
             List<Fraction> fractions = new List<Fraction>();
             fractions.Add(fraction1);
@@ -35,6 +35,12 @@ namespace Fraction
             Console.WriteLine("Comparation and sum:");
             Console.WriteLine(fraction1.CompareTo(fraction2));
             Console.WriteLine((fraction1 + fraction2).ToString());
+
+            Console.WriteLine("Casts:");
+            double doubleValue = fraction3;
+            Console.WriteLine(doubleValue);
+            Fraction castedFraction = (Fraction) (-5.1243);
+            Console.WriteLine("{0:S}", castedFraction);
         }
     }
 }

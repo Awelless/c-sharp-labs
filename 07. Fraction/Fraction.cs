@@ -59,7 +59,7 @@ namespace Fraction
         {
             Match match = _mixedFractionRegex.Match(s);
             long integer = long.Parse(match.Groups[1].Value);
-            long numerator = Math.Abs(long.Parse(match.Groups[2].Value));
+            long numerator = long.Parse(match.Groups[2].Value) * (integer > 0 ? 1 : -1);
             long denominator = long.Parse(match.Groups[3].Value);
             return Of(integer * denominator + numerator, denominator);
         }
@@ -70,7 +70,7 @@ namespace Fraction
             long integer = long.Parse(match.Groups[1].Value);
             string decimalPart = match.Groups[2].Value;
             long denominator = (long)Math.Pow(10, decimalPart.Length);
-            long numerator = Math.Abs(long.Parse(decimalPart));
+            long numerator = long.Parse(decimalPart) * (integer > 0 ? 1 : -1);
             return Of(integer * denominator + numerator, denominator);
         }
 
@@ -239,33 +239,62 @@ namespace Fraction
         {
             return Convert.ToUInt64(ToDouble(provider), provider);
         }
-        public static explicit operator byte(Fraction fraction)
+        
+        public static implicit operator byte(Fraction fraction)
         {
             return fraction.ToByte(null);
         }
-        public static explicit operator short(Fraction fraction)
+        public static implicit operator short(Fraction fraction)
         {
             return fraction.ToInt16(null);
         }
-        public static explicit operator int(Fraction fraction)
+        public static implicit operator int(Fraction fraction)
         {
             return fraction.ToInt32(null);
         }
-        public static explicit operator long(Fraction fraction)
+        public static implicit operator long(Fraction fraction)
         {
             return fraction.ToInt64(null);
         }
-        public static explicit operator float(Fraction fraction)
+        public static implicit operator float(Fraction fraction)
         {
             return fraction.ToSingle(null);
         }
-        public static explicit operator double(Fraction fraction)
+        public static implicit operator double(Fraction fraction)
         {
             return fraction.ToDouble(null);
         }
-        public static explicit operator decimal(Fraction fraction)
+        public static implicit operator decimal(Fraction fraction)
         {
             return fraction.ToDecimal(null);
+        }
+        public static explicit operator Fraction(byte value)
+        {
+            return Of(value, 1);
+        }
+        public static explicit operator Fraction(short value)
+        {
+            return Of(value, 1);
+        }
+        public static explicit operator Fraction(int value)
+        {
+            return Of(value, 1);
+        }
+        public static explicit operator Fraction(long value)
+        {
+            return Of(value, 1);
+        }
+        public static explicit operator Fraction(float value)
+        {
+            return ParseDouble(value.ToString());
+        }
+        public static explicit operator Fraction(double value)
+        {
+            return ParseDouble(value.ToString());
+        }
+        public static explicit operator Fraction(decimal value)
+        {
+            return ParseDouble(value.ToString());
         }
         
         public static Fraction operator +(Fraction fraction)
