@@ -4,6 +4,10 @@ namespace BankAccount.Accounts
 {
     public abstract class AbstractAccount : IComparable<AbstractAccount>
     {
+        public delegate void InfoMessageHandler(string message);
+
+        public event InfoMessageHandler InfoEvent;
+        
         private static uint _idCounter = 1;
         
         public uint Id { get; }
@@ -19,98 +23,86 @@ namespace BankAccount.Accounts
             IsBlocked = false;
         }
 
-        public virtual bool PutMoney(double moneyAmount)
+        public virtual void PutMoney(double moneyAmount)
         {
             if (moneyAmount < 0)
             {
-                Console.WriteLine("Invalid value of moneyAmount: " + moneyAmount);
-                return false;
+                throw new ArgumentException("Invalid value of moneyAmount: " + moneyAmount);
             }
 
             if (IsBlocked)
             {
-                Console.WriteLine("You count put money. Account is blocked");
-                return false;
+                throw new ForbiddenOperationException("You can't put money. Account is blocked");
             }
 
             Balance += moneyAmount;
-            return true;
         }
         
-        public virtual bool PutMoney(int moneyAmount)
+        public virtual void PutMoney(int moneyAmount)
         {
             if (moneyAmount < 0)
             {
-                Console.WriteLine("Invalid value of moneyAmount: " + moneyAmount);
-                return false;
+                throw new ArgumentException("Invalid value of moneyAmount: " + moneyAmount);
             }
 
             if (IsBlocked)
             {
-                Console.WriteLine("You count put money. Account is blocked");
-                return false;
+                throw new ForbiddenOperationException("You can't put money. Account is blocked");
             }
 
             Balance += moneyAmount;
-            return true;
         }
 
-        public virtual bool WithdrawMoney(double moneyAmount)
+        public virtual void WithdrawMoney(double moneyAmount)
         {
             if (moneyAmount < 0)
             {
-                Console.WriteLine("Invalid value of moneyAmount: " + moneyAmount);
-                return false;
+                throw new ArgumentException("Invalid value of moneyAmount: " + moneyAmount);
             }
             
             if (IsBlocked)
             {
-                Console.WriteLine("You count withdraw money. Account is blocked");
-                return false;
+                throw new ForbiddenOperationException("You can't withdraw money. Account is blocked");
             }
 
             if (moneyAmount > Balance)
             {
-                Console.WriteLine("You don't have enough money to withdraw: " + moneyAmount);
-                return false;
+                throw new ForbiddenOperationException("You don't have enough money to withdraw: " + moneyAmount);
             }
 
             Balance -= moneyAmount;
-            return true;
         }
         
-        public virtual bool WithdrawMoney(int moneyAmount)
+        public virtual void WithdrawMoney(int moneyAmount)
         {
             if (moneyAmount < 0)
             {
-                Console.WriteLine("Invalid value of moneyAmount: " + moneyAmount);
-                return false;
+                throw new ArgumentException("Invalid value of moneyAmount: " + moneyAmount);
             }
             
             if (IsBlocked)
             {
-                Console.WriteLine("You count withdraw money. Account is blocked");
-                return false;
+                throw new ForbiddenOperationException("You can't withdraw money. Account is blocked");
             }
 
             if (moneyAmount > Balance)
             {
-                Console.WriteLine("You don't have enough money to withdraw: " + moneyAmount);
-                return false;
+                throw new ForbiddenOperationException("You don't have enough money to withdraw: " + moneyAmount);
             }
 
             Balance -= moneyAmount;
-            return true;
         }
 
         public void BlockAccount()
         {
             IsBlocked = true;
+            InfoEvent?.Invoke("Account is blocked");
         }
         
         public void UnblockAccount()
         {
-            IsBlocked = true;
+            IsBlocked = false;
+            InfoEvent?.Invoke("Account is unblocked");
         }
 
         public int CompareTo(AbstractAccount o)
@@ -163,6 +155,11 @@ namespace BankAccount.Accounts
                                  "isBlocked = {3}\n" +
                                  "}}", 
                 Id, Balance, Currency, IsBlocked);
+        }
+
+        protected void InvokeInfoEvent(string message)
+        {
+            InfoEvent?.Invoke(message);
         }
     }
 }
