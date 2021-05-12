@@ -96,13 +96,13 @@ namespace BankAccount.Accounts
         public void BlockAccount()
         {
             IsBlocked = true;
-            InfoEvent?.Invoke("Account is blocked");
+            InvokeInfoEvent("Account is blocked");
         }
         
         public void UnblockAccount()
         {
             IsBlocked = false;
-            InfoEvent?.Invoke("Account is unblocked");
+            InvokeInfoEvent("Account is unblocked");
         }
 
         public int CompareTo(AbstractAccount o)
